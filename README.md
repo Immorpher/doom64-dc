@@ -1,4 +1,12 @@
-# Doom 64 for Dreamcast (updated 2025/10/05) #
+# Doom 64 for Dreamcast (updated 2025/12/10) #
+
+Early xmas present for everyone. You don't have to know how to build a toolchain, or compile anymore.
+
+You can upload a ROM and download a CDI.
+
+Find more details here: https://colab.research.google.com/drive/1qkODLG1009ZPBHfMD7wF1qmcHxxrzZwt
+
+Now for business as usual.
 
 Do not open an issue for emulator-related problems. I close them without reading.
 
