@@ -197,6 +197,8 @@ mapped_buttons_t ingame_mapping = {
 }
 };
 
+bool keyb_swap_strafe = false;
+
 void wav_shutdown(void);
 
 pvr_init_params_t pvr_params = { { PVR_BINSIZE_16, 0, PVR_BINSIZE_16, 0, PVR_BINSIZE_16 },
@@ -900,12 +902,22 @@ int I_GetControllerData(void)
 				// MOVE
 				case KBD_KEY_D: // RIGHT
 				case KBD_KEY_RIGHT:
-					ret |= PAD_RIGHT;
+					if(keyb_swap_strafe){
+						ret |= PAD_R_TRIG;
+						last_Rtrig = 255;
+					}else{
+						ret |= PAD_RIGHT;
+					}
 					break;
 
 				case KBD_KEY_A: // LEFT
 				case KBD_KEY_LEFT:
-					ret |= PAD_LEFT;
+					if(keyb_swap_strafe){
+						ret |= PAD_L_TRIG;
+						last_Ltrig = 255;
+					}else{
+						ret |= PAD_LEFT;
+					}
 					break;
 
 				case KBD_KEY_S: // DOWN
@@ -932,13 +944,21 @@ int I_GetControllerData(void)
 
 				// STRAFE
 				case KBD_KEY_COMMA: // L
-					ret |= PAD_L_TRIG;
-					last_Ltrig = 255;
+					if(keyb_swap_strafe){
+						ret |= PAD_LEFT;
+					}else{
+						ret |= PAD_L_TRIG;
+						last_Ltrig = 255;
+					}
 					break;
 
 				case KBD_KEY_PERIOD: // R
-					ret |= PAD_R_TRIG;
-					last_Rtrig = 255;
+					if(keyb_swap_strafe){
+						ret |= PAD_RIGHT;	
+					}else{
+						ret |= PAD_R_TRIG;
+						last_Rtrig = 255;
+					}				
 					break;
 
 				case KBD_KEY_BACKSPACE:
@@ -1875,6 +1895,10 @@ void I_ParseMappingFile(char *mapping_file)
 					update_map(dcused, dcbuts, &ingame_mapping.map_weaponbackward);
 				} else if (lineno == 13 && !strncmp("WEAPONFORWARD", n64_control, 13)) {
 					update_map(dcused, dcbuts, &ingame_mapping.map_weaponforward);
+				} else if (lineno == 14 && !strncmp("KEYBSWAPSTRAFE", n64_control, 14)) {
+					if(dcused == 1){
+						keyb_swap_strafe = true;
+					}
 				} else {
 					goto map_parse_error;
 				}
@@ -1883,7 +1907,7 @@ void I_ParseMappingFile(char *mapping_file)
 			token = strtok_r(NULL, outer_delimiters, &outer_saveptr);
 		}
 
-		if (lineno != 13) {
+		if (lineno != 14) {
 			dbgio_printf("invalid mapping file, using defaults\n");
 			goto map_parse_error;
 		}
