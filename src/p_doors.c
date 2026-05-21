@@ -160,7 +160,7 @@ int EV_DoDoor(line_t *line, vldoor_e type) // 80010750
 		door = Z_Malloc(sizeof(*door), PU_LEVSPEC, 0);
 		P_AddThinker(&door->thinker);
 		sec->specialdata = door;
-		door->thinker.function = T_VerticalDoor;
+		door->thinker.function = (void (*)(void))T_VerticalDoor;
 		door->topwait = VDOORWAIT;
 		door->speed = VDOORSPEED;
 		door->sector = sec;
@@ -267,7 +267,7 @@ void EV_VerticalDoor(line_t *line, mobj_t *thing) // 80010998
 	door = Z_Malloc(sizeof(*door), PU_LEVSPEC, 0);
 	P_AddThinker(&door->thinker);
 	sec->specialdata = door;
-	door->thinker.function = T_VerticalDoor;
+	door->thinker.function = (void (*)(void))T_VerticalDoor;
 	door->speed = VDOORSPEED;
 	door->sector = sec;
 	door->direction = 1;

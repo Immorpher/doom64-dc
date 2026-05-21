@@ -64,7 +64,7 @@ int P_SetAimCamera(line_t *line, boolean aim) // 8000DF20
 			camera = Z_Malloc(sizeof(*camera), PU_LEVSPEC,
 					  NULL);
 			P_AddThinker(&camera->thinker);
-			camera->thinker.function = T_AimCamera;
+			camera->thinker.function = (void (*)(void))T_AimCamera;
 			camera->viewmobj = mo;
 		}
 
@@ -137,7 +137,7 @@ void P_SpawnDelayTimer(int tics, void (*action)()) // 8000E160
 
 	timer = Z_Malloc(sizeof(*timer), PU_LEVSPEC, NULL);
 	P_AddThinker(&timer->thinker);
-	timer->thinker.function = T_CountdownTimer;
+	timer->thinker.function = (void (*)(void))T_CountdownTimer;
 	timer->tics = tics;
 	timer->finishfunc = action;
 }
@@ -442,7 +442,7 @@ int EV_SpawnMobjTemplate(int tag) // 8000EB8C
 		} else {
 			fade = Z_Malloc(sizeof(*fade), PU_LEVSPEC, NULL);
 			P_AddThinker(&fade->thinker);
-			fade->thinker.function = T_FadeThinker;
+			fade->thinker.function = (void (*)(void))T_FadeThinker;
 			fade->mobj = mobj;
 			fade->amount = 8;
 			fade->destAlpha = mobj->alpha;
@@ -482,7 +482,7 @@ int EV_FadeOutMobj(int tag) // 8000ED08
 
 		fade = Z_Malloc(sizeof(*fade), PU_LEVSPEC, 0);
 		P_AddThinker(&fade->thinker);
-		fade->thinker.function = T_FadeThinker;
+		fade->thinker.function = (void (*)(void))T_FadeThinker;
 		fade->mobj = mo;
 		fade->amount = -8;
 		fade->destAlpha = 0;
@@ -514,7 +514,7 @@ void P_SpawnQuake(int tics) // 8000EE7C
 
 	quake = Z_Malloc(sizeof(*quake), PU_LEVSPEC, 0);
 	P_AddThinker(&quake->thinker);
-	quake->thinker.function = T_Quake;
+	quake->thinker.function = (void (*)(void))T_Quake;
 	quake->tics = tics;
 	quake->f_tics = tics;
 
@@ -630,7 +630,7 @@ void P_SetMovingCamera(line_t *line) // 8000F2F8
 
 	camera = Z_Malloc(sizeof(*camera), PU_LEVSPEC, 0);
 	P_AddThinker(&camera->thinker);
-	camera->thinker.function = T_MoveCamera;
+	camera->thinker.function = (void (*)(void))T_MoveCamera;
 
 	for (mo = mobjhead.next; mo != &mobjhead; mo = mo->next) {
 		if (mo->tid != line->tag)

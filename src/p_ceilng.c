@@ -142,7 +142,7 @@ int EV_DoCeiling(line_t *line, ceiling_e type, fixed_t speed) // 8000FA4C
 		ceiling = Z_Malloc(sizeof(*ceiling), PU_LEVSPEC, 0);
 		P_AddThinker(&ceiling->thinker);
 		sec->specialdata = ceiling;
-		ceiling->thinker.function = T_MoveCeiling;
+		ceiling->thinker.function = (void (*)(void))T_MoveCeiling;
 		ceiling->sector = sec;
 		ceiling->crush = false;
 
@@ -274,7 +274,7 @@ void P_ActivateInStasisCeiling(line_t *line) // 8000FD88
 		    (activeceilings[i]->direction == 0)) {
 			activeceilings[i]->direction =
 				activeceilings[i]->olddirection;
-			activeceilings[i]->thinker.function = T_MoveCeiling;
+			activeceilings[i]->thinker.function = (void (*)(void))T_MoveCeiling;
 		}
 	}
 }

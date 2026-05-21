@@ -67,7 +67,7 @@ extern pvr_dr_state_t dr_state;
 
 extern void draw_pvr_line_hdr(vector_t *v1, vector_t *v2, int color);
 
-#if 0
+#if 1
 extern void array_fast_cpy(void **dst, const void **src, size_t n);
 extern void single_fast_cpy(void *dst, const void *src);
 #else
@@ -280,13 +280,15 @@ static int lf_idx(void)
 extern int Wireframe;
 
 unsigned __attribute__((noinline)) clip_poly(d64Poly_t *p, unsigned p_vismask);
+extern fixed_t FogNear;
+
 
 static void tnl_poly(int list, d64Poly_t *p)
 {
 	unsigned i;
 	unsigned p_vismask;
 	unsigned verts_to_process = p->n_verts;
-
+#if !FOG_VERTEX
 	// set current bumpmap parameters to the default from whoever called us
 	boargb = defboargb;
 
@@ -321,13 +323,29 @@ static void tnl_poly(int list, d64Poly_t *p)
 			break;
 		}
 	}
-	
+#endif
 	// apply viewport/modelview/projection transform matrix to each vertex
 	// all matrices are multiplied together once per frame in r_main.c
 	// transform is a single `mat_trans_single3_nodivw` per vertex
 	d64ListVert_t *dv = p->dVerts;
 	for (i = 0; i < verts_to_process; i++) {
 		transform_d64ListVert(dv);
+#if FOG_VERTEX
+		float w = dv->w;
+		float z = dv->v->z;
+		int fog;
+		int mul = 128000/((1000)-(FogNear));
+		int ofs = ((500-(FogNear))*256/((1000)-(FogNear)));
+		if (w < 0.0f)
+			fog = 0;
+		else {
+			fog = (int)((mul * (z / w))  + ofs);
+			if (fog > 255)
+				fog = 255;
+			fog = (fog >= 0) ? fog : 0;
+		}
+		dv->v->oargb = (fog & 0xff) << 24;
+#endif
 		dv++;
 	}
 
@@ -919,10 +937,7 @@ void R_WallPrep(seg_t *seg)
 					rn = ((float)r1 - (float)r2) * scale + (float)r1;
 					gn = ((float)g1 - (float)g2) * scale + (float)g1;
 					bn = ((float)b1 - (float)b2) * scale + (float)b1;
-					float maxc = 255.0f;
-					if (rn > maxc) maxc = rn;
-					if (gn > maxc) maxc = gn;
-					if (bn > maxc) maxc = bn;
+					float maxc = MAX4(255.0f, rn, gn, bn);
 					maxc = 255.0f * approx_recip(maxc);
 					rn *= maxc;
 					gn *= maxc;
@@ -980,10 +995,7 @@ void R_WallPrep(seg_t *seg)
 					gn = ((float)g1 - (float)g2) * scale + (float)g1;
 					bn = ((float)b1 - (float)b2) * scale + (float)b1;
 
-					float maxc = 255.0f;
-					if (rn > maxc) maxc = rn;
-					if (gn > maxc) maxc = gn;
-					if (bn > maxc) maxc = bn;
+					float maxc = MAX4(255.0f, rn, gn, bn);
 					maxc = 255.0f * approx_recip(maxc);
 					rn *= maxc;
 					gn *= maxc;
@@ -2718,9 +2730,14 @@ void R_RenderThings(subsector_t *sub)
 						wp2, hp2, pvr_spritecache[cached_index], PVR_FILTER_BILINEAR);
 
 					cxt_spritecache.gen.specular = PVR_SPECULAR_ENABLE;
+#if FOG_VERTEX
+					cxt_spritecache.gen.fog_type = PVR_FOG_VERTEX;
+					cxt_spritecache.gen.fog_type2 = PVR_FOG_VERTEX;
+
+#else
 					cxt_spritecache.gen.fog_type = PVR_FOG_TABLE;
 					cxt_spritecache.gen.fog_type2 = PVR_FOG_TABLE;
-
+#endif
 					if (!menu_settings.VideoFilter)
 						cxt_spritecache.txr.filter = PVR_FILTER_NONE;
 
@@ -2906,18 +2923,23 @@ extern pvr_poly_hdr_t wepndecs_hdr_nofilter;
 // return 2pi + approximate atan2f(y,x), range-adjusted into [0,2pi]
 static float wepn_atan2f(float y, float x)
 {
+	if (y == 0 && x == 0)
+		return twopi_i754;
+
 	float res = twopi_i754;
-	float abs_y = fabsf(y) + 1e-10f; // kludge to prevent 0/0 condition
+
+	float abs_y = fabsf(y);
 	float absy_plus_absx = abs_y + fabsf(x);
 	float inv_absy_plus_absx = approx_recip(absy_plus_absx);
 	float angle = halfpi_i754 - copysignf(quarterpi_i754, x);
 	float r = (x - copysignf(abs_y, x)) * inv_absy_plus_absx;
 	angle += (0.1963f * r * r - 0.9817f) * r;
+
 	res += copysignf(angle, y);
 	// adjust the angle into the range (0,2pi)
-	if (res > twopi_i754) {
+	if (res > twopi_i754)
 		res -= twopi_i754;
-	}
+
 	return res;
 }
 

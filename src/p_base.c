@@ -128,7 +128,7 @@ void P_MobjThinker(mobj_t *mobj)
 				mobj->tics = st->tics;
 				mobj->sprite = st->sprite;
 				mobj->frame = st->frame;
-				mobj->latecall = st->action;
+				mobj->latecall = (void (*)(struct mobj_s *))st->action;
 			}
 		}
 	}

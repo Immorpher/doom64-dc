@@ -353,7 +353,7 @@ void P_Start(void)
 	/* do a nice little fade in effect */
 	fb = Z_Malloc(sizeof(*fb), PU_LEVSPEC, 0);
 	P_AddThinker(&fb->thinker);
-	fb->thinker.function = T_FadeInBrightness;
+	fb->thinker.function = (void (*)(void))T_FadeInBrightness;
 	fb->factor = 0;
 
 	/* autoactivate line specials */

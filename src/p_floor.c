@@ -181,7 +181,7 @@ int EV_DoFloor(line_t *line, floor_e floortype, fixed_t speed) // 800139FC
 		floor = Z_Malloc(sizeof(*floor), PU_LEVSPEC, 0);
 		P_AddThinker(&floor->thinker);
 		sec->specialdata = floor;
-		floor->thinker.function = T_MoveFloor;
+		floor->thinker.function = (void (*)(void))T_MoveFloor;
 		floor->type = floortype;
 		floor->crush = false;
 		floor->sector = sec;
@@ -356,7 +356,7 @@ int EV_BuildStairs(line_t *line, stair_e type) // 80013DB0
 		floor = Z_Malloc(sizeof(*floor), PU_LEVSPEC, 0);
 		P_AddThinker(&floor->thinker);
 		sec->specialdata = floor;
-		floor->thinker.function = T_MoveFloor;
+		floor->thinker.function = (void (*)(void))T_MoveFloor;
 		floor->direction = 1;
 		floor->sector = sec;
 		floor->instant = false;
@@ -408,7 +408,7 @@ int EV_BuildStairs(line_t *line, stair_e type) // 80013DB0
 				floor = Z_Malloc(sizeof(*floor), PU_LEVSPEC, 0);
 				P_AddThinker(&floor->thinker);
 				sec->specialdata = floor;
-				floor->thinker.function = T_MoveFloor;
+				floor->thinker.function = (void (*)(void))T_MoveFloor;
 				floor->direction = 1;
 				floor->sector = sec;
 				floor->speed = speed;
@@ -515,7 +515,7 @@ int EV_SplitSector(line_t *line, boolean sync) // 80014234
 		split = Z_Malloc(sizeof(*split), PU_LEVSPEC, 0);
 		P_AddThinker(&split->thinker);
 		sec->specialdata = split;
-		split->thinker.function = T_MoveSplitPlane;
+		split->thinker.function = (void (*)(void))T_MoveSplitPlane;
 		split->sector = sec;
 
 		split->ceildest =

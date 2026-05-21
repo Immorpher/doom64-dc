@@ -46,7 +46,7 @@ void P_SpawnFireFlicker(sector_t *sector) // 800157B4
 
 	flick = Z_Malloc(sizeof(*flick), PU_LEVSPEC, 0);
 	P_AddThinker(&flick->thinker);
-	flick->thinker.function = T_FireFlicker;
+	flick->thinker.function = (void (*)(void))T_FireFlicker;
 	flick->sector = sector;
 	flick->special = sector->special;
 	flick->count = 3;
@@ -111,7 +111,7 @@ void P_SpawnGlowingLight(sector_t *sector, glowtype_e type) // 80015968
 
 	g = Z_Malloc(sizeof(*g), PU_LEVSPEC, 0);
 	P_AddThinker(&g->thinker);
-	g->thinker.function = T_Glow;
+	g->thinker.function = (void (*)(void))T_Glow;
 	g->sector = sector;
 	g->count = 2;
 	g->direction = 1;
@@ -173,7 +173,7 @@ void P_SpawnLightFlash(sector_t *sector) // 80015AB4
 
 	flash = Z_Malloc(sizeof(*flash), PU_LEVSPEC, 0);
 	P_AddThinker(&flash->thinker);
-	flash->thinker.function = T_LightFlash;
+	flash->thinker.function = (void (*)(void))T_LightFlash;
 	flash->sector = sector;
 	flash->special = sector->special;
 	flash->count = (P_Random() & 63) + 1;
@@ -225,7 +225,7 @@ void P_SpawnStrobeFlash(sector_t *sector, int fastOrSlow) // 80015BB4
 
 	flash = Z_Malloc(sizeof(*flash), PU_LEVSPEC, 0);
 	P_AddThinker(&flash->thinker);
-	flash->thinker.function = T_StrobeFlash;
+	flash->thinker.function = (void (*)(void))T_StrobeFlash;
 	flash->sector = sector;
 	flash->special = sector->special;
 	flash->brighttime = STROBEBRIGHT;
@@ -246,7 +246,7 @@ void P_SpawnStrobeAltFlash(sector_t *sector, int fastOrSlow) // 80015C44
 
 	flash = Z_Malloc(sizeof(*flash), PU_LEVSPEC, 0);
 	P_AddThinker(&flash->thinker);
-	flash->thinker.function = T_StrobeFlash;
+	flash->thinker.function = (void (*)(void))T_StrobeFlash;
 	flash->sector = sector;
 	flash->special = sector->special;
 	flash->brighttime = STROBEBRIGHT2;
@@ -424,7 +424,7 @@ void P_SpawnSequenceLight(sector_t *sector, boolean first) // 80016038
 
 	seq = Z_Malloc(sizeof(*seq), PU_LEVSPEC, 0);
 	P_AddThinker(&seq->thinker);
-	seq->thinker.function = T_SequenceGlow;
+	seq->thinker.function = (void (*)(void))T_SequenceGlow;
 	seq->sector = sector;
 	seq->special = sector->special;
 	seq->count = 1;
@@ -463,7 +463,7 @@ void P_UpdateLightThinker(int destlight, int srclight) // 80016118
 
 	lt = Z_Malloc(sizeof(*lt), PU_LEVSPEC, 0);
 	P_AddThinker(&lt->thinker);
-	lt->thinker.function = T_LightMorph;
+	lt->thinker.function = (void (*)(void))T_LightMorph;
 	lt->inc = 0;
 	lt->dest = destlight;
 	lt->src = srclight;
@@ -600,7 +600,7 @@ void P_CombineLightSpecials(sector_t *sector) // 80016578
 
 	switch (sector->special) {
 	case 1:
-		func = T_LightFlash;
+		func = (void (*)(void))T_LightFlash;
 		break;
 	case 2:
 	case 3:
@@ -609,15 +609,15 @@ void P_CombineLightSpecials(sector_t *sector) // 80016578
 	//case 205:
 	case 206:
 	case 208:
-		func = T_StrobeFlash;
+		func = (void (*)(void))T_StrobeFlash;
 		break;
 	case 8:
 	case 9:
 	case 11:
-		func = T_Glow;
+		func = (void (*)(void))T_Glow;
 		break;
 	case 17:
-		func = T_FireFlicker;
+		func = (void (*)(void))T_FireFlicker;
 		break;
 	default:
 		return;
@@ -629,7 +629,7 @@ void P_CombineLightSpecials(sector_t *sector) // 80016578
 
 		combine = Z_Malloc(sizeof(*combine), PU_LEVSPEC, 0);
 		P_AddThinker(&combine->thinker);
-		combine->thinker.function = T_Combine;
+		combine->thinker.function = (void (*)(void))T_Combine;
 		combine->sector = sector;
 		combine->combiner = ((combine_t *)thinker)->sector;
 		combine->special = sector->special;

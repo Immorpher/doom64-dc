@@ -285,19 +285,15 @@ void R_InitSymbols(void)
 		symbolssize = fs_load("/cd/symbols.raw", &data);
 		if (symbolssize == -1) {
 			// force the video output to do anything
-			pvr_wait_ready();
 			pvr_scene_begin();
 			pvr_list_begin(PVR_LIST_OP_POLY);
 			pvr_list_finish();
 			pvr_scene_finish();
-			pvr_wait_ready();
 			// force the video output to do anything
-			pvr_wait_ready();
 			pvr_scene_begin();
 			pvr_list_begin(PVR_LIST_OP_POLY);
 			pvr_list_finish();
 			pvr_scene_finish();
-			pvr_wait_ready();
 			// now dbgio_printf to fb should reliably show up even on HDMI-VGA
 			I_Error("Cant load from /pc or /cd");
 		} else {

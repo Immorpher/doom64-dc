@@ -213,7 +213,6 @@ void W_DrawLoadScreen(char *what, int current, int total)
 
 	sprintf(drawstr, "loading: %s", what);
 
-	pvr_wait_ready();
 	pvr_scene_begin();
 	pvr_list_begin(PVR_LIST_OP_POLY);
 	pvr_dr_init(&dr_state);
@@ -332,7 +331,6 @@ void W_DrawLoadScreen(char *what, int current, int total)
 
 	pvr_list_finish();
 	pvr_scene_finish();
-	pvr_wait_ready();
 }
 
 /*
@@ -483,8 +481,6 @@ void W_ReplaceWeaponBumps(weapontype_t wepn)
 
 	if (gamemap == 33)
 		return;
-
-	pvr_wait_ready();
 
 	// clean up old bump texture
 	if (wepnbump_txr) {
@@ -696,11 +692,9 @@ kneedeep_check:
 	else
 		I_Error(waderrstr);
 
-	pvr_wait_ready();
 	pvr_vertex_t *backvert;
 
 	for (int i = 0; i < 300; i++) {
-		pvr_wait_ready();
 		pvr_scene_begin();
 		pvr_list_begin(PVR_LIST_OP_POLY);
 		pvr_dr_init(&dr_state);
@@ -747,8 +741,6 @@ kneedeep_check:
 
 		pvr_list_finish();
 		pvr_scene_finish();
-
-		pvr_wait_ready();
 	}
 
 	if (back_tex)

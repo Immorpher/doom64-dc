@@ -8,6 +8,8 @@ typedef int fixed_t;
 
 #include "i_main.h"
 
+#define FOG_VERTEX 0
+
 #define ALL_SPRITES_COUNT (575 + 310)
 
 // next power of 2 greater than / equal to v
@@ -177,6 +179,10 @@ extern int context_change;
 
 extern unsigned char lightcurve[256];
 extern unsigned char lightmax[256];
+
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MAX3(a,b,c) (MAX(MAX((a),(b)), (c)))
+#define MAX4(a,b,c,d) (MAX(MAX3((a),(b),(c)),(d)))
 
 // this was originally doing (((aaa)&1)<<15) to set the alpha bit
 // that isn't right especially not when I was setting palette entries for intensity textures

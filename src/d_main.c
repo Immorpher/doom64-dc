@@ -386,7 +386,6 @@ int MiniLoop(void (*start)(void), void (*stop)(int), int (*ticker)(void), void (
 			if (exit != ga_nothing)
 				break;
 
-			pvr_wait_ready();
 			pvr_scene_begin();
 			pvr_list_begin(PVR_LIST_OP_POLY);
 			pvr_dr_init(&dr_state);

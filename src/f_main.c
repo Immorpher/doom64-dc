@@ -1048,7 +1048,6 @@ void BufferedDrawSprite(int type, state_t *state, int rotframe, int color, int x
 		// they can't be loaded fast enough if they reload every frame
 		if (cached_yet != (int)cur_monster) {
 			if (cached_yet != -1) {
-				pvr_wait_ready();
 				int num_mlump = get_num_monster_lumps(cached_yet);
 				for (int i = 0; i < num_mlump; i++) {
 					if (pvr_spritecache[i]) {
@@ -1159,7 +1158,6 @@ void F_Stop(int exit)
 	DrawerStatus = 0;
 	S_StopMusic();
 	I_WIPE_FadeOutScreen();
-	pvr_wait_ready();
 	int num_mlump = get_num_monster_lumps(cached_yet);
 	for (int i = 0; i < num_mlump; i++) {
 		if (pvr_spritecache[i]) {

@@ -628,7 +628,6 @@ void  __attribute__((noreturn)) __I_Error(const char *funcname, char *error, ...
 	va_end(args);
 
 	pvr_scene_finish();
-	pvr_wait_ready();
 
 	if (early_error) {
 		vid_clear(255,0,0);
@@ -651,7 +650,6 @@ void  __attribute__((noreturn)) __I_Error(const char *funcname, char *error, ...
 		exit(0);
 #else
 		while (true) {
-			pvr_wait_ready();
 			pvr_scene_begin();
 			pvr_list_begin(PVR_LIST_OP_POLY);
 			pvr_list_finish();
@@ -1094,8 +1092,6 @@ void I_WIPE_MeltScreen(void)
 	uint32_t save;
 	uint16_t *fb = (uint16_t *)Z_Malloc(FB_TEX_SIZE, PU_STATIC, NULL);
 
-	pvr_wait_ready();
-
 	P_FlushAllCached();
 	pvrfb = pvr_mem_malloc(FB_TEX_SIZE);
 	if (!pvrfb)
@@ -1208,7 +1204,6 @@ void I_WIPE_MeltScreen(void)
 		pvr_list_prim(PVR_LIST_TR_POLY, wipeverts, 8 * sizeof(pvr_vertex_t));
 
 		pvr_scene_finish();
-		pvr_wait_ready();
 
 		// after PVR changes, have to submit twice
 		// or it flickers
@@ -1218,7 +1213,6 @@ void I_WIPE_MeltScreen(void)
 		pvr_list_prim(PVR_LIST_TR_POLY, &wipehdr, sizeof(pvr_poly_hdr_t));
 		pvr_list_prim(PVR_LIST_TR_POLY, wipeverts, 8 * sizeof(pvr_vertex_t));
 		pvr_scene_finish();
-		pvr_wait_ready();
 
 		if (i < (158*2)) {
 			save = irq_disable();
@@ -1253,8 +1247,6 @@ void I_WIPE_FadeOutScreen(void)
 
 	uint32_t save;
 	uint16_t *fb = (uint16_t *)Z_Malloc(FB_TEX_SIZE, PU_STATIC, NULL);
-
-	pvr_wait_ready();
 
 	P_FlushAllCached();
 	pvrfb = pvr_mem_malloc(FB_TEX_SIZE);
@@ -1334,7 +1326,6 @@ void I_WIPE_FadeOutScreen(void)
 		pvr_list_prim(PVR_LIST_TR_POLY, &wipehdr, sizeof(pvr_poly_hdr_t));
 		pvr_list_prim(PVR_LIST_TR_POLY, wipeverts, 4 * sizeof(pvr_vertex_t));
 		pvr_scene_finish();
-		pvr_wait_ready();
 	}
 
 	pvr_mem_free(pvrfb);

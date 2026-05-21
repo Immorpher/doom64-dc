@@ -363,15 +363,25 @@ void *P_CachePvrTexture(int i, int tag)
 			// specular field holds lighting color
 			cpt_txr_cxt.gen.specular = PVR_SPECULAR_ENABLE;
 			// Doom 64 fog
+#if FOG_VERTEX
+			cpt_txr_cxt.gen.fog_type = PVR_FOG_VERTEX;
+			cpt_txr_cxt.gen.fog_type2 = PVR_FOG_VERTEX;
+#else
 			cpt_txr_cxt.gen.fog_type = PVR_FOG_TABLE;
 			cpt_txr_cxt.gen.fog_type2 = PVR_FOG_TABLE;
+#endif
 		} else {
 			pvr_poly_cxt_txr(&cpt_txr_cxt, PVR_LIST_PT_POLY, D64_TPAL(PAL_FLAT), width, height, pvr_texture_ptrs[i][0], PVR_FILTER_BILINEAR);
 			// specular field holds lighting color
 			cpt_txr_cxt.gen.specular = PVR_SPECULAR_ENABLE;
 			// Doom 64 fog
+#if FOG_VERTEX
+			cpt_txr_cxt.gen.fog_type = PVR_FOG_VERTEX;
+			cpt_txr_cxt.gen.fog_type2 = PVR_FOG_VERTEX;
+#else
 			cpt_txr_cxt.gen.fog_type = PVR_FOG_TABLE;
 			cpt_txr_cxt.gen.fog_type2 = PVR_FOG_TABLE;
+#endif
 		}
 
 		pvr_poly_compile(&txr_hdr_nobump[i][0], &cpt_txr_cxt);
@@ -495,15 +505,25 @@ void *P_CachePvrTexture(int i, int tag)
 				// specular field holds lighting color
 				cpt_txr_cxt.gen.specular = PVR_SPECULAR_ENABLE;
 				// Doom 64 fog
+#if FOG_VERTEX
+				cpt_txr_cxt.gen.fog_type = PVR_FOG_VERTEX;
+				cpt_txr_cxt.gen.fog_type2 = PVR_FOG_VERTEX;
+#else
 				cpt_txr_cxt.gen.fog_type = PVR_FOG_TABLE;
 				cpt_txr_cxt.gen.fog_type2 = PVR_FOG_TABLE;
+#endif
 			} else {
 				pvr_poly_cxt_txr(&cpt_txr_cxt, PVR_LIST_PT_POLY, D64_TARGB, width, height, pvr_texture_ptrs[i][k], PVR_FILTER_BILINEAR);
 				// specular field holds lighting color
 				cpt_txr_cxt.gen.specular = PVR_SPECULAR_ENABLE;
 				// Doom 64 fog
+#if FOG_VERTEX
+				cpt_txr_cxt.gen.fog_type = PVR_FOG_VERTEX;
+				cpt_txr_cxt.gen.fog_type2 = PVR_FOG_VERTEX;
+#else
 				cpt_txr_cxt.gen.fog_type = PVR_FOG_TABLE;
 				cpt_txr_cxt.gen.fog_type2 = PVR_FOG_TABLE;
+#endif
 			}
 			pvr_poly_compile(&txr_hdr_nobump[i][k], &cpt_txr_cxt);
 

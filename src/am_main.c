@@ -525,10 +525,10 @@ void draw_pvr_line(vector_t *v1, vector_t *v2, int color)
 
 	// https://devcry.heiho.net/html/2017/20170820-opengl-line-drawing.html
 	dx = ov2->x - ov1->x;
-	dy = ov1->y - ov2->y;//ov2->y - ov1->y;
+	dy = ov1->y - ov2->y;
 	// I have been *told* that it is better for codegen to not call `frsqrt` 
 	hlw_invmag = (1.0f / sqrtf((dx * dx) + (dy * dy))) * (LINEWIDTH * 0.5f);
-	nx = dy * hlw_invmag;//-dy * hlw_invmag;
+	nx = dy * hlw_invmag;
 	ny = dx * hlw_invmag;
 
 	vert = pvrlineverts;

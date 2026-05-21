@@ -1514,7 +1514,7 @@ void T_LaserThinker(laser_t *laser) // 8001C9B8
 			/* fade out the laser puff */
 			fade = Z_Malloc(sizeof(*fade), PU_LEVSPEC, 0);
 			P_AddThinker(&fade->thinker);
-			fade->thinker.function = T_FadeThinker;
+			fade->thinker.function = (void (*)(void))T_FadeThinker;
 			fade->amount = -24;
 			fade->destAlpha = 0;
 			fade->flagReserve = 0;
@@ -1645,7 +1645,7 @@ void A_FireLaser(player_t *player, pspdef_t *psp) // 8001CAC0
 		/* setup laser puff */
 		laser = (laser_t *)Z_Malloc(sizeof(*laser), PU_LEVSPEC, 0);
 		P_AddThinker(&laser->thinker);
-		laser->thinker.function = T_LaserThinker;
+		laser->thinker.function = (void (*)(void))T_LaserThinker;
 		laser->laserdata = laser_data;
 		laser->marker = P_SpawnMobj(x2, y2, z2, MT_PROJ_LASER);
 

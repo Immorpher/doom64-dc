@@ -110,11 +110,30 @@ static pvr_vertex_t  flash_verts[4] = {
 };
 
 float pi_sub_viewangle;
+
+#if FOG_VERTEX
+void vertfog_color(float a, float r, float g, float b) {
+	PVR_SET(0x0B4, PVR_PACK_COLOR(a, r, g, b));
+}
+#endif
+
+// improved N64 fog approximation, borrowed from Star Fox 64 DC port
+// the following isn't very rigorous
+// I eyeballed it and tweaked the `a` param until it seemed almost right
+static inline float exp_map_0_1000_f(float x) {
+	const float a = 138.62943611198894f;
+	if (x <= 0.0f)    return 0.0f;
+	if (x >= 1000.0f) return x;
+
+	const float t = x * 0.001f; // t in [0,1]
+	const float num = expm1f(a * (t - 1.0f)); // argument in [-a, 0] (no overflow)
+	const float den = expm1f(-a); // finite (~ -1)
+	return 1000.0f * (1.0f - num / (den));
+}
+
 void R_RenderPlayerView(void)
 {
 	fixed_t pitch;
-	int fogfactor;
-	float fogmin, fogmax, fogposition;
 
 	viewplayer = &players[0];
 
@@ -148,17 +167,15 @@ void R_RenderPlayerView(void)
 //#define PVR_MIN_Z 0.0001f
 //	pvr_set_zclip(PVR_MIN_Z);
 
-	fogfactor = (1000 - FogNear);
-
-	if (fogfactor <= 0)
-		fogfactor = 1;
-
-	fogposition = ((float)fogfactor / 1000.0f);
-	fogmin = 5.0f / fogposition;
-	fogmax = 30.0f / fogposition;
-
+	float scale = (3800) * 0.001f;
+	float d64_fog_start = 8 + scale * exp_map_0_1000_f(FogNear);
+	float d64_fog_end   = 8 + scale * exp_map_0_1000_f(1000);
+#if FOG_VERTEX
+	vertfog_color(1.0f, (float)UNPACK_R(FogColor) / 255.0f, (float)UNPACK_G(FogColor) / 255.0f, (float)UNPACK_B(FogColor) / 255.0f);
+#else
 	pvr_fog_table_color(1.0f, (float)UNPACK_R(FogColor) / 255.0f, (float)UNPACK_G(FogColor) / 255.0f, (float)UNPACK_B(FogColor) / 255.0f);
-	pvr_fog_table_linear(fogmin, fogmax);
+	pvr_fog_table_linear(d64_fog_start * 0.5f, d64_fog_end * 0.5f);
+#endif
 
 	R_RotateX(R_RotX, (float)finesine[pitch] * recip64k, (float)finecosine[pitch] * recip64k);
 

@@ -138,7 +138,7 @@ int EV_DoPlat(line_t *line, plattype_e type, int amount) // 8001AA94
 		plat->type = type;
 		plat->sector = sec;
 		plat->sector->specialdata = plat;
-		plat->thinker.function = T_PlatRaise;
+		plat->thinker.function = (void (*)(void))T_PlatRaise;
 		plat->crush = false;
 		plat->tag = line->tag;
 		switch (type) {
@@ -240,7 +240,7 @@ void P_ActivateInStasis(int tag) // 8001AE6C
 		if (activeplats[i] && (activeplats[i])->tag == tag &&
 		    (activeplats[i])->status == in_stasis) {
 			(activeplats[i])->status = (activeplats[i])->oldstatus;
-			(activeplats[i])->thinker.function = T_PlatRaise;
+			(activeplats[i])->thinker.function = (void (*)(void))T_PlatRaise;
 		}
 }
 
@@ -256,7 +256,7 @@ int EV_StopPlat(line_t *line) // 8001AF2C
 			ok = 1;
 			(activeplats[j])->oldstatus = (activeplats[j])->status;
 			(activeplats[j])->status = in_stasis;
-			(activeplats[j])->thinker.function = NULL;
+			(activeplats[j])->thinker.function = (void (*)(void))NULL;
 		}
 	}
 

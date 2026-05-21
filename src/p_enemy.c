@@ -981,7 +981,7 @@ void A_CyberDeathEvent(mobj_t *actor) // 80011F44
 	//P_BossExplode(actor, 4, 12);
 	exp = Z_Malloc(sizeof(*exp), PU_LEVSPEC, 0);
 	P_AddThinker(&exp->thinker);
-	exp->thinker.function = T_MobjExplode;
+	exp->thinker.function = (void (*)(void))T_MobjExplode;
 	exp->mobj = actor;
 	exp->delay = 0;
 	exp->delaydefault = 4;
@@ -1547,7 +1547,7 @@ void A_MoveGroundFire(mobj_t *fire) // 80012EA4
 	//P_FadeMobj(mo, -8, 0, mobjflag_t::MF_NONE);
 	fade = Z_Malloc(sizeof(*fade), PU_LEVSPEC, 0);
 	P_AddThinker(&fade->thinker);
-	fade->thinker.function = T_FadeThinker;
+	fade->thinker.function = (void (*)(void))T_FadeThinker;
 	fade->amount = -8;
 	fade->destAlpha = 0;
 	fade->flagReserve = 0;
@@ -1585,7 +1585,7 @@ void A_RectDeathEvent(mobj_t *actor) // 80012F6C
 	//P_BossExplode(actor, 3, 32);
 	exp = Z_Malloc(sizeof(*exp), PU_LEVSPEC, 0);
 	P_AddThinker(&exp->thinker);
-	exp->thinker.function = T_MobjExplode;
+	exp->thinker.function = (void (*)(void))T_MobjExplode;
 	exp->mobj = actor;
 	exp->delay = 0;
 	exp->delaydefault = 3;
@@ -1848,7 +1848,7 @@ void A_FadeOut(mobj_t *actor) // 800133A0
 		//P_FadeMobj(actor, -8, 0x30, mobjflag_t::MF_NONE);
 		fade = Z_Malloc(sizeof(*fade), PU_LEVSPEC, 0);
 		P_AddThinker(&fade->thinker);
-		fade->thinker.function = T_FadeThinker;
+		fade->thinker.function = (void (*)(void))T_FadeThinker;
 		fade->amount = -8;
 		fade->destAlpha = 0x30;
 		fade->flagReserve = 0;
@@ -1875,7 +1875,7 @@ void A_FadeIn(mobj_t *actor) // 80013428
 		//P_FadeMobj(actor, 8, 0xff, mobjflag_t::MF_NONE);
 		fade = Z_Malloc(sizeof(*fade), PU_LEVSPEC, 0);
 		P_AddThinker(&fade->thinker);
-		fade->thinker.function = T_FadeThinker;
+		fade->thinker.function = (void (*)(void))T_FadeThinker;
 		fade->mobj = actor;
 		fade->amount = 8;
 		fade->destAlpha = 0xff;
