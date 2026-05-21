@@ -1,6 +1,6 @@
-# Doom 64 for Dreamcast (updated 2025/12/10) #
+# Doom 64 for Dreamcast (updated 2026/05/21) #
 
-Early xmas present for everyone. You don't have to know how to build a toolchain, or compile anymore.
+You don't have to know how to build a toolchain, or compile anymore.
 
 You can upload a ROM and download a CDI.
 
@@ -10,7 +10,7 @@ Now for business as usual.
 
 Do not open an issue for emulator-related problems. I close them without reading.
 
-Important note: Doom 64 finally works and is stable when built against KOS v2.2.1.
+Important note: Doom 64 works and is stable when built against KOS v2.2.1. Also KOS master (v2.3.0) is known to work, with the caveat that it might break at any time.
 
 **Please pay close attention to the README as significant new features have been added and the build instructions have changed.**
 
