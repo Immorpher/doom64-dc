@@ -774,7 +774,7 @@ kneedeep_check:
 	// weapon bumpmaps
 	W_DrawLoadScreen("weapon bumpmaps", 50, 100);
 	W_LoadWepnBumps();
-	W_DrawLoadScreen("weapon bumpaps", 100, 100);
+	W_DrawLoadScreen("weapon bumpmaps", 100, 100);
 
 	// all non-enemy sprites are in an uncompressed, pretwiddled 8bpp 1024^2 sheet texture
 	W_DrawLoadScreen("non-enemy sprites", 50, 100);

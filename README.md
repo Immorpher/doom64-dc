@@ -1,4 +1,14 @@
-# Doom 64 for Dreamcast (updated 2025/10/05) #
+# Doom 64 for Dreamcast (updated 2025/12/10) #
+
+Early xmas present for everyone. You don't have to know how to build a toolchain, or compile anymore.
+
+You can upload a ROM and download a CDI.
+
+Find more details here: https://colab.research.google.com/drive/1qkODLG1009ZPBHfMD7wF1qmcHxxrzZwt
+
+Now for business as usual.
+
+Do not open an issue for emulator-related problems. I close them without reading.
 
 Important note: Doom 64 finally works and is stable when built against KOS v2.2.1.
 
@@ -94,7 +104,7 @@ If you are going to file a Github issue, make sure you are using that version to
 
 Please follow the instructions for building KOS found in the wiki: [ https://dreamcast.wiki/Getting_Started_with_Dreamcast_development#Configuring_and_compiling_KOS_and_kos-ports ].
 
-For best results, modify the `environ.sh` before building KOS to use `-O3` and `-flto=auto`.
+For best results, use the provided `environ.sh` to build KOS and Doom 64.
 
 **How to generate Doom 64 disc image**
 

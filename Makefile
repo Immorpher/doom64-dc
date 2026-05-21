@@ -33,7 +33,7 @@ C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(file:.c=.o))
 
-CFLAGS = -Wno-deprecated-declarations -Wall -Wno-implicit-fallthrough -Wformat=2
+CFLAGS = -std=gnu17 -Wno-deprecated-declarations -Wall -Wno-implicit-fallthrough -Wformat=2
 # everyone asks "HoW dO i GeT fPs On ScReEn???"
 #CFLAGS += -DDCLOCALDEV -DOSDSHOWFPS
 
