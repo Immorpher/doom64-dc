@@ -28,8 +28,8 @@ documentation and/or software.
 #define _SYS_MD5_H_
 /* MD5 context. */
 typedef struct MD5Context {
-  uint32 state[4];	/* state (ABCD) */
-  uint32 count[2];	/* number of bits, modulo 2^64 (lsb first) */
+  uint32_t state[4];	/* state (ABCD) */
+  uint32_t count[2];	/* number of bits, modulo 2^64 (lsb first) */
   unsigned char buffer[64];	/* input buffer */
 } MD5_CTX;
 
