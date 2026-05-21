@@ -954,14 +954,24 @@ kneedeep_check:
 	// headers for sprite diffuse when no bumpmapping
 	pvr_poly_cxt_txr(&pvr_sprite_cxt, PVR_LIST_TR_POLY, D64_TPAL(PAL_ITEM), 1024, 1024, pvr_non_enemy, PVR_FILTER_BILINEAR);
 	pvr_sprite_cxt.gen.specular = PVR_SPECULAR_ENABLE;
+#if FOG_VERTEX
+	pvr_sprite_cxt.gen.fog_type = PVR_FOG_VERTEX;
+	pvr_sprite_cxt.gen.fog_type2 = PVR_FOG_VERTEX;
+#else
 	pvr_sprite_cxt.gen.fog_type = PVR_FOG_TABLE;
 	pvr_sprite_cxt.gen.fog_type2 = PVR_FOG_TABLE;
+#endif
 	pvr_poly_compile(&pvr_sprite_hdr, &pvr_sprite_cxt);
 
 	pvr_poly_cxt_txr(&pvr_sprite_cxt, PVR_LIST_TR_POLY, D64_TPAL(PAL_ITEM), 1024, 1024, pvr_non_enemy, PVR_FILTER_NONE);
 	pvr_sprite_cxt.gen.specular = PVR_SPECULAR_ENABLE;
+#if FOG_VERTEX
+	pvr_sprite_cxt.gen.fog_type = PVR_FOG_VERTEX;
+	pvr_sprite_cxt.gen.fog_type2 = PVR_FOG_VERTEX;
+#else
 	pvr_sprite_cxt.gen.fog_type = PVR_FOG_TABLE;
 	pvr_sprite_cxt.gen.fog_type2 = PVR_FOG_TABLE;
+#endif
 	pvr_poly_compile(&pvr_sprite_hdr_nofilter, &pvr_sprite_cxt);
 
 	// headers for sprite diffuse when bumpmapping active (weapons)
