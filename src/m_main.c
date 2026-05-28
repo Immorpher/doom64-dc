@@ -148,6 +148,8 @@ char *ControlText[] =
 
 #define M_TXT101 "WIREFRAME"
 
+#define M_TXT102 "Vehemence"
+
 static char *MenuText[] =
 	{
 		M_TXT00, M_TXT01, M_TXT02, M_TXT03, M_TXT04, M_TXT05, M_TXT06,
@@ -166,7 +168,7 @@ static char *MenuText[] =
 		M_TXT85, M_TXT86, M_TXT87,
 		M_TXT88, M_TXT89, M_TXT90, M_TXT91,
 		M_TXT92, M_TXT93, M_TXT94, M_TXT95, M_TXT96, M_TXT97, M_TXT98,
-		M_TXT99, M_TXT100, M_TXT101
+		M_TXT99, M_TXT100, M_TXT101, M_TXT102
 	};
 
 #define NUM_MENU_TITLE 3
@@ -188,20 +190,22 @@ menuitem_t Menu_Skill[NUM_MENU_SKILL] =
 		{ 6, 102, 180 }, // Return
 	};
 
-#define NUM_MENU_EPISODES 3
+#define NUM_MENU_EPISODES 4
 menuitem_t Menu_Episode[NUM_MENU_EPISODES] =
 {
 	{ 85, 102, 80 },    // Doom 64
 	{ 87, 102, 100},    // Knee-Deep In The Dead
+	{ 102, 102, 135},    // Vehemence
 	{ 6, 102, 180 }, // Return
 };
 
-#define NUM_MENU_2EPISODES 4
+#define NUM_MENU_2EPISODES 5
 menuitem_t Menu_2Episode[NUM_MENU_2EPISODES] =
 {
 	{ 85, 102, 80 },    // Doom 64
 	{ 86, 102, 100},    // The Lost Levels
 	{ 87, 102, 120},    // Knee-Deep In The Dead
+	{ 102, 102, 155},    // Vehemence
 	{ 6, 102, 200 }, // Return
 };
 
@@ -1174,8 +1178,8 @@ int M_MenuTicker(void)
 						}
 
 						if (extra_episodes) {
-							if (m_actualmap > 49) {
-								m_actualmap = 49;
+							if (m_actualmap > 79) {
+								m_actualmap = 79;
 							}
 						} else if (m_actualmap > ABS_LASTLEVEL) {
 							m_actualmap = ABS_LASTLEVEL;
@@ -1649,7 +1653,7 @@ int M_MenuTicker(void)
 				}
 				break;
 
-			case 87:
+			case 87: // Knee Deep in the Dead Episode
 				if (truebuttons) {
 					startmap = 41;
 
@@ -1667,7 +1671,7 @@ int M_MenuTicker(void)
 					if (exit == ga_exit)
 						return ga_nothing;
 
-					nextmap = 41; // [Immorpher] For running introduction for Lost Levels
+					nextmap = 41; // [Immorpher] For running introduction
 					menu_settings.runintroduction = true; // [Immorpher] turn introduction on
 
 					return exit;
@@ -1718,6 +1722,32 @@ int M_MenuTicker(void)
 					return ga_nothing;
 				}
 				break;
+			
+			case 102: // Vehemence campaign
+				if (truebuttons) {
+					startmap = 50;
+
+					S_StartSound(NULL, sfx_pistol);
+					M_SaveMenuData();
+
+					MenuItem = Menu_Skill;
+					itemlines = NUM_MENU_SKILL;
+					MenuCall = M_MenuTitleDrawer;
+					cursorpos = 2;
+
+					exit = MiniLoop(M_FadeInStart, M_MenuClearCall, M_MenuTicker, M_MenuGameDrawer);
+					M_RestoreMenuData((exit == ga_exit));
+
+					if (exit == ga_exit)
+						return ga_nothing;
+
+					nextmap = 50; // [Immorpher] For running introduction for Lost Levels
+					menu_settings.runintroduction = true; // [Immorpher] turn introduction on
+
+					return exit;
+				}
+				break;
+				
 			}
 			exit = ga_nothing;
 		}

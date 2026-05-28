@@ -58,25 +58,121 @@ extern int nextmap;
 #define MI_TXT47 "Computer Station"
 #define MI_TXT48 "Phobos Anomaly"
 #define MI_TXT49 "Military Base"
+#define MI_TXT50 "Hexagonal Heat"
+#define MI_TXT51 "Wellspring Catacombs"
+#define MI_TXT52 "Blood Canyon"
+#define MI_TXT53 "Storage Complex"
+#define MI_TXT54 "Wretched Passage"
+#define MI_TXT55 "Tempestas Labyrinthus"
+#define MI_TXT56 "Cursed Corridors"
+#define MI_TXT57 "MeatShot"
+#define MI_TXT58 "The Blue Castle"
+#define MI_TXT59 "Palace of Shadows"
+#define MI_TXT60 "Foreboding Pestilence"
+#define MI_TXT61 "The Descent"
+#define MI_TXT62 "Ubiquitous"
+#define MI_TXT63 "Gateway Lab"
+#define MI_TXT64 "Far Removed"
+#define MI_TXT65 "The Burning Eye"
+#define MI_TXT66 "Immorphium Storage"
+#define MI_TXT67 "Pain Harvest"
+#define MI_TXT68 "Foggy Mountain"
+#define MI_TXT69 "Dark Blue Dot"
+#define MI_TXT70 "The Gasman Cometh"
+#define MI_TXT71 "Twilight Scream"
+#define MI_TXT72 "The Vehemence"
+#define MI_TXT73 "Emergency Escape"
+#define MI_TXT74 "Doomguy Must Die!"
+#define MI_TXT75 "Surnevo Bownkread"
+#define MI_TXT76 "Let's Play With Mom"
+#define MI_TXT77 "Let's Play With Cyberdemons"
+#define MI_TXT78 "CyberPac"
+#define MI_TXT79 "Forgotten Battlegrounds"
 
 mapinfo_t MapInfo[] = //8005A478
-	{ { T_NULL, 0 },     { MI_TXT01, 96 },	{ MI_TXT02, 97 },
-	  { MI_TXT03, 105 }, { MI_TXT04, 104 }, { MI_TXT05, 101 },
-	  { MI_TXT06, 107 }, { MI_TXT07, 108 }, { MI_TXT08, 110 },
-	  { MI_TXT09, 95 },  { MI_TXT10, 98 },	{ MI_TXT11, 99 },
-	  { MI_TXT12, 102 }, { MI_TXT13, 93 },	{ MI_TXT14, 106 },
-	  { MI_TXT15, 111 }, { MI_TXT16, 97 },	{ MI_TXT17, 103 },
-	  { MI_TXT18, 94 },  { MI_TXT19, 100 }, { MI_TXT20, 112 },
-	  { MI_TXT21, 109 }, { MI_TXT22, 101 }, { MI_TXT23, 108 },
-	  { MI_TXT24, 98 },  { MI_TXT25, 97 },	{ MI_TXT26, 98 },
-	  { MI_TXT27, 94 },  { MI_TXT28, 99 },	{ MI_TXT29, 101 },
-	  { MI_TXT30, 102 }, { MI_TXT31, 103 }, { MI_TXT32, 104 },
-	  { MI_TXT33, 115 }, { MI_TXT34, 100 }, { MI_TXT35, 95 },
-	  { MI_TXT36, 111 }, { MI_TXT37, 94 },  { MI_TXT38, 105 },
-	  { MI_TXT39, 98 },  { MI_TXT40, 101 }, { MI_TXT41, 97 },
-	  { MI_TXT42, 105 }, { MI_TXT43, 104 }, { MI_TXT44, 101 },
-	  { MI_TXT45, 107 }, { MI_TXT46, 108 }, { MI_TXT47, 110 },
-	  { MI_TXT48, 95 },  { MI_TXT49, 98 },  { T_NULL, 0 } };
+	{ 
+		{ T_NULL, 0 }, // map 0!     
+		{ MI_TXT01, 96 },
+		{ MI_TXT02, 97 },
+		{ MI_TXT03, 105 },
+		{ MI_TXT04, 104 },
+		{ MI_TXT05, 101 },
+		{ MI_TXT06, 107 },
+		{ MI_TXT07, 108 },
+		{ MI_TXT08, 110 },
+		{ MI_TXT09, 95 }, 
+		{ MI_TXT10, 98 },
+		{ MI_TXT11, 99 },
+		{ MI_TXT12, 102 },
+		{ MI_TXT13, 93 },
+		{ MI_TXT14, 106 },
+		{ MI_TXT15, 111 },
+		{ MI_TXT16, 97 },
+		{ MI_TXT17, 103 },
+		{ MI_TXT18, 94 },
+		{ MI_TXT19, 100 },
+		{ MI_TXT20, 112 },
+		{ MI_TXT21, 109 },
+		{ MI_TXT22, 101 },
+		{ MI_TXT23, 108 },
+		{ MI_TXT24, 98 },
+		{ MI_TXT25, 97 },
+		{ MI_TXT26, 98 },
+		{ MI_TXT27, 94 },
+		{ MI_TXT28, 99 },
+		{ MI_TXT29, 101 },
+		{ MI_TXT30, 102 },
+		{ MI_TXT31, 103 },  //
+		{ MI_TXT32, 104 }, //
+		{ MI_TXT33, 115 },  //
+		{ MI_TXT34, 100 },  //
+		{ MI_TXT35, 95 }, //
+		{ MI_TXT36, 111 },  //
+		{ MI_TXT37, 94 },   //
+		{ MI_TXT38, 105 }, //
+		{ MI_TXT39, 98 },   //
+		{ MI_TXT40, 101 },  //
+		{ MI_TXT41, 97 }, //
+		{ MI_TXT42, 105 },  //
+		{ MI_TXT43, 104 },  //
+		{ MI_TXT44, 101 }, //
+		{ MI_TXT45, 107 },  //
+		{ MI_TXT46, 108 },  //
+		{ MI_TXT47, 110 }, //
+		{ MI_TXT48, 95 },   //
+		{ MI_TXT49, 98 },   //
+		{ MI_TXT50, 96 }, // MAP01 "Hexagonal Heat"
+		{ MI_TXT51, 97 }, // MAP02 "Wellspring Catacombs"
+		{ MI_TXT52, 105 },  // MAP03 "Blood Canyon"
+		{ MI_TXT53, 104 },  // MAP04 "Storage Complex"
+		{ MI_TXT54, 101 }, // MAP05 "Wretched Passage"
+		{ MI_TXT55, 107 },  // MAP06 "Tempestas Labyrinthus"
+		{ MI_TXT56, 108 },  // MAP07 "Cursed Corridors"
+		{ MI_TXT57, 110 }, // MAP08 "MeatShot"
+		{ MI_TXT58, 95 },  // MAP09 "The Blue Castle"
+		{ MI_TXT59, 98 }, //	 MAP10 "Palace of Shadows"
+		{ MI_TXT60, 99 }, // MAP11 "Foreboding Pestilence"
+		{ MI_TXT61, 102 },  // MAP12 "The Descent"
+		{ MI_TXT62, 93 },	 // MAP13 "Ubiquitous"
+		{ MI_TXT63, 106 }, // MAP14 "Gateway Lab"
+		{ MI_TXT64, 111 },  // MAP15 "Far Removed"
+		{ MI_TXT65, 97 },	 // MAP16 "The Burning Eye"
+		{ MI_TXT66, 103 }, // MAP17 "Immorphium Storage"
+		{ MI_TXT67, 94 },   // MAP18 "Pain Harvest"
+		{ MI_TXT68, 100 },  // MAP19 "Foggy Mountain"
+		{ MI_TXT69, 112 }, // MAP20 "Dark Blue Dot"
+		{ MI_TXT70, 109 },  // MAP21 "The Gasman Cometh"
+		{ MI_TXT71, 101 },  // MAP22 "Twilight Scream"
+		{ MI_TXT72, 108 }, // MAP23 "The Vehemence"
+		{ MI_TXT73, 98 },   // MAP24 "Emergency Escape"
+		{ MI_TXT74, 97 },	 // MAP25 "Doomguy Must Die!"
+		{ MI_TXT75, 98 }, // MAP26 "SurnevoBownkread"
+		{ MI_TXT76, 94 },   // MAP27 "Let's Play With Mom"
+		{ MI_TXT77, 99 },	 // MAP28 "Let's Play With Cyberdemons"
+		{ MI_TXT78, 101 }, // MAP29 "CyberPac"
+		{ MI_TXT79, 102 },  // MAP30 "Forgotten Battlegrounds"
+		{ T_NULL, 0 } 
+	};
 
 typedef struct pstats_s {
 	int killpercent;

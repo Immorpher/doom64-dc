@@ -72,6 +72,24 @@
 #define C_INTR3_TXT19 "The evil knows you are here."
 #define C_INTR3_TXT20 "There is no turning back now!"
 
+
+// [Immorpher] New introduction text adapted from Doom 64 reloaded!
+#define C_INTR4_TXT01 "Stranded in hell, your comrades"
+#define C_INTR4_TXT02 "have been avenged after the death"
+#define C_INTR4_TXT03 "of the resurrector."
+#define C_INTR4_TXT04 " "
+#define C_INTR4_TXT05 "But your journey is not over, as a"
+#define C_INTR4_TXT06 "path of U.A.C. technology is strewn"
+#define C_INTR4_TXT07 "in front of you."
+#define C_INTR4_TXT08 " "
+#define C_INTR4_TXT09 "The demons have been scavenging our"
+#define C_INTR4_TXT10 "equipment. Could they be trying to"
+#define C_INTR4_TXT11 "open a portal of their own? The only"
+#define C_INTR4_TXT12 "way to find out is through..."
+#define C_INTR4_TXT13 " "
+#define C_INTR4_TXT14 "MERCILESS EXTERMINATION!"
+
+// Other intermissions
 #define C_END1_TXT01 "You cackle as the"
 #define C_END1_TXT02 "familiarity of the"
 #define C_END1_TXT03 "situation occurs to you."
@@ -191,6 +209,13 @@ char *intr3cluster
 	  C_INTR3_TXT13, C_INTR3_TXT14, C_INTR3_TXT15, C_INTR3_TXT16,
 	  C_INTR3_TXT17, C_INTR3_TXT18, C_INTR3_TXT19, C_INTR3_TXT20,
 	  T_NULL };
+	  
+char *intr4cluster
+	[] = // [Immorpher] Vehemence text
+	{ C_INTR4_TXT01, C_INTR4_TXT02, C_INTR4_TXT03, C_INTR4_TXT04,
+	  C_INTR4_TXT05, C_INTR4_TXT06, C_INTR4_TXT07, C_INTR4_TXT08,
+	  C_INTR4_TXT09, C_INTR4_TXT10, C_INTR4_TXT11, C_INTR4_TXT12,
+	  C_INTR4_TXT13, C_INTR4_TXT14, T_NULL };
 
 char *endcluster1[] =
 	{ C_END1_TXT01, C_END1_TXT02, C_END1_TXT03, C_END1_TXT04,
@@ -309,6 +334,9 @@ void F_StartIntermission(void)
 		textypos = 20;
 	} else if (nextmap == 41) {
 		text = intr3cluster;
+		textypos = 20;
+	} else if (nextmap == 50) {
+		text = intr4cluster;
 		textypos = 20;
 	} else if ((gamemap == 8) && (nextmap == 9)) {
 		text = endcluster1;

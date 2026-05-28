@@ -268,7 +268,7 @@ void R_SetupSky(void)
 		break;
 	}
 
-	if (gamemap > 40) {
+	if (gamemap > 40 && gamemap < 50) { // special skies for knee deep in the dead
 		R_RenderSKY = R_RenderDoomE1Sky;
 		SkyCloudColor = 0x24242480;
 		FogNear = 990;

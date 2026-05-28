@@ -368,11 +368,11 @@ void G_RunGame(void) // 80004794
 			return;
 
 		if (extra_episodes == 2 && startmap >= 41)
-			last_level = 49;
+			last_level = 79;
 		else if (extra_episodes == 2 && startmap >= 34 && startmap <= 41)
 			last_level = LOST_LASTLEVEL;
 		else if (extra_episodes == 1 && startmap >= 41)
-			last_level = 49;
+			last_level = 79;
 		else
 			last_level = ABS_LASTLEVEL;
 
