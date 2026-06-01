@@ -302,7 +302,7 @@ void S_StartMusic(int mus_seq)
 
 	int looping = 1;
 
-	if ((!from_menu) && (gamemap > 40) && !((mus_seq >= 113) && (mus_seq <= 116))) {
+	if ((!from_menu) && (gamemap > 40) && (gamemap < 50) && !((mus_seq >= 113) && (mus_seq <= 116))) { // special music for knee deep in the dead
 		sprintf(itname, "%s/mus/e1m%d.adpcm", fnpre, gamemap-40);
 	} else {
 		sprintf(itname, "%s/mus/%s.adpcm", fnpre, name);
